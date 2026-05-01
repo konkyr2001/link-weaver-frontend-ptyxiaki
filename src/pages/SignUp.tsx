@@ -181,7 +181,7 @@ const SignUp = () => {
                   className={`${errorRecaptcha ? "border border-red-500" : ""}`}
                   value={recaptcha}
                   onChange={(token) => setRecaptcha(token)}
-                  sitekey={import.meta.env.VITE_SIGNUP_RECAPTCHA_SITE_KEY}
+                  sitekey={import.meta.env.VITE_RECAPTCHA_VISIBLE_SECRET_KEY}
                 />
               </div>
 
