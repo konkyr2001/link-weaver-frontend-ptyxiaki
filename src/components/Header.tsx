@@ -55,10 +55,18 @@ const Header = ({ active }: HeaderProps) => {
   return (
     <header className="border-b border-border">
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2">
-          <Link2 className="w-5 h-5 text-primary" />
-          <span className="font-display font-bold text-lg text-foreground">
-            bundl
+        <Link
+          to="/"
+          className="group flex items-center gap-2 text-primary"
+        >
+          <Link2 className="w-5 h-5 transition-all duration-300 ease-out group-hover:scale-110" />
+          <span className="font-display font-bold text-lg">
+            <span className="transition-all duration-300 ease-out text-foreground group-hover:text-primary">
+              We
+            </span>
+            <span className="text-primary transition-all duration-300 ease-out group-hover:tracking-wide">
+              Linkly
+            </span>
           </span>
         </Link>
 

@@ -51,11 +51,23 @@ export default function BundleView() {
       {/* Header */}
       <header className="border-b border-border">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
-            <ArrowLeft className="w-4 h-4" />
+          <Link
+            to="/"
+            className="group flex items-center gap-2 text-foreground transition-all duration-300 ease-out"
+          >
+            <ArrowLeft className="w-4 h-4 transition-all duration-300 group-hover:text-primary group-hover:-translate-x-1" />
+
             <div className="flex items-center gap-2">
-              <Link2 className="w-5 h-5 text-primary" />
-              <span className="font-display font-bold text-lg">bundl</span>
+              <Link2 className="w-5 h-5 transition-all duration-300 ease-out text-primary group-hover:scale-110" />
+
+              <span className="font-display font-bold text-lg flex items-center">
+                <span className="transition-all duration-300 ease-out group-hover:text-primary">
+                  We
+                </span>
+                <span className="text-primary transition-all duration-300 ease-out group-hover:tracking-wide">
+                  Linkly
+                </span>
+              </span>
             </div>
           </Link>
           <div className="flex items-center gap-2">
