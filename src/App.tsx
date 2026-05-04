@@ -8,6 +8,7 @@ import BundleView from "./pages/BundleView";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import NotFound from "./pages/NotFound";
+import Account from "./pages/Account";
 import History from "./pages/History";
 import GuestRoute from "./components/GuestRoute";
 
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/b/:slug" element={<BundleView />} />
           <Route path="/history" element={<History />} />
+          <Route path="/account" element={<Account />} />
           <Route path="/login" element={
             <GuestRoute> <Login /> </GuestRoute>} />
           <Route path="/signup" element={

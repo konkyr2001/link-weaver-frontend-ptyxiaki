@@ -23,16 +23,14 @@ const SignUp = () => {
   const [recaptcha, setRecaptcha] = useState(null);
   const [loading, setLoading] = useState(false);
   const [errorFirstName, setErrorFirstName] = useState(false);
-  const [errorLastName, setErrorLastName] = useState(false);
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorRecaptcha, setErrorRecaptcha] = useState(false);
   const navigate = useNavigate();
 
   const checkErrors = () => {
-    if (!firstName.trim() || !lastName.trim() || !email.trim() || !password.trim() || !recaptcha) {
+    if (!firstName.trim() || !email.trim() || !password.trim() || !recaptcha) {
       setErrorFirstName(!firstName.trim());
-      setErrorLastName(!lastName.trim());
       setErrorEmail(!email.trim());
       setErrorPassword(!password.trim());
       setErrorRecaptcha(!recaptcha);
@@ -132,7 +130,6 @@ const SignUp = () => {
                     placeholder="Doe"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value.trim())}
-                    className={`${errorLastName ? "border-red-500 focus-visible:ring-red-500" : ""}`}
                   />
                 </div>
               </div>

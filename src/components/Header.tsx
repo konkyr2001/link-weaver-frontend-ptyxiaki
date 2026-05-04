@@ -8,13 +8,14 @@ import { googleLogout } from "@react-oauth/google";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 
 type HeaderProps = {
-  active?: "home" | "pricing" | "login" | "signup" | "history";
+  active?: "home" | "pricing" | "login" | "signup" | "history" | "account";
 };
 
 const Header = ({ active }: HeaderProps) => {
   const { theme, toggleTheme } = useTheme();
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null;
   const [open, setOpen] = useState(false);
+  console.log(user)
 
   const handleLogout = () => {
     googleLogout();
@@ -35,6 +36,11 @@ const Header = ({ active }: HeaderProps) => {
       {user && (
         <Link to="/history" className={linkClass("history")} onClick={() => setOpen(false)}>
           History
+        </Link>
+      )}
+      {user && (
+        <Link to="/account" className={linkClass("account")} onClick={() => setOpen(false)}>
+          Account
         </Link>
       )}
     </>

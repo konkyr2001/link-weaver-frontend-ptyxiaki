@@ -67,7 +67,7 @@ const authorizeGoogleUser = async (token) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        token
+        token,
       }),
     });
     const data = await response.json();
@@ -87,8 +87,8 @@ const getUserHistory = async (token) => {
   try {
     const response = await fetch(`${URL}/api/user/history`, {
       headers: {
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     });
     const data = await response.json();
     if (!response.ok) {
@@ -100,4 +100,118 @@ const getUserHistory = async (token) => {
     return { error: error.message || "Something went wrong" };
   }
 };
-export { login, signup, authorizeGoogleUser, getUserHistory };
+
+const getUser = async (token) => {
+  try {
+    const response = await fetch(`${URL}/api/user/me`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      return { error: data.error || "Something went wrong" };
+    }
+    return data;
+  } catch (error) {
+    return { error: error.message || "Something went wrong" };
+  }
+};
+
+const updateProfile = async (token, firstName, lastName) => {
+  try {
+    const response = await fetch(`${URL}/api/user/updateProfile`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+      }),
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      return { error: data.error || "Something went wrong" };
+    }
+    return data;
+  } catch (error) {
+    return { error: error.message || "Something went wrong" };
+  }
+};
+
+const changePassword = async (token, currentPassword, newPassword) => {
+  try {
+    const response = await fetch(`${URL}/api/user/changePassword`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        currentPassword,
+        newPassword,
+      }),
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      return { error: data.error || "Something went wrong" };
+    }
+    return data;
+  } catch (error) {
+    return { error: error.message || "Something went wrong" };
+  }
+};
+
+const deleteGoogleUser = async (token) => {
+  try {
+    const response = await fetch(`${URL}/api/user/google/me`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      return { error: data.error || "Something went wrong" };
+    }
+    return data;
+  } catch (error) {
+    return { error: error.message || "Something went wrong" };
+  }
+};
+
+const deleteLocalUser = async (token, password) => {
+  try {
+    const response = await fetch(`${URL}/api/user/me`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        password,
+      }),
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      return { error: data.error || "Something went wrong" };
+    }
+    return data;
+  } catch (error) {
+    return { error: error.message || "Something went wrong" };
+  }
+};
+export {
+  login,
+  signup,
+  authorizeGoogleUser,
+  getUserHistory,
+  getUser,
+  updateProfile,
+  changePassword,
+  deleteGoogleUser,
+  deleteLocalUser,
+};

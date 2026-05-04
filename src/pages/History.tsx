@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { ExternalLink, Clock, FolderOpen } from "lucide-react";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
-import { getUserHistory } from "@/services/user";
+import { getUser, getUserHistory } from "@/services/user";
 import { toast } from "sonner";
 
 interface HistoryItem {
@@ -27,28 +27,42 @@ function hoursRemaining(expiresAt: string): number {
 }
 
 export default function History() {
+  const token = localStorage.getItem("token");
   const [items, setItems] = useState<HistoryItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
 
   useEffect(() => {
-    async function getHistory() {
-      setLoading(true);
-      const token = localStorage.getItem("token");
-      const data = await getUserHistory(token);
-      if (data.error) {
-        setLoading(false);
-        return toast.error(data.error);
+    const fetchUser = async () => {
+      if (!token) return;
+      const freshUser = await getUser(token);
+      if (!freshUser?.error) {
+        localStorage.setItem("user", JSON.stringify(freshUser));
+        setUser(freshUser);
       }
-      if (data.projects.length == 0) {
-        setLoading(false);
-        return;
-      }
-      setLoading(false);
-      setItems(data.projects);
-    }
-
-    getHistory();
+    };
+    fetchUser();
+    fetchHistory();
   }, []);
+
+  async function fetchHistory() {
+    setLoading(true);
+    const token = localStorage.getItem("token");
+    const data = await getUserHistory(token);
+    if (data.error) {
+      setLoading(false);
+      return;
+    }
+    if (data.projects.length === 0) {
+      setLoading(false);
+      return;
+    }
+    setLoading(false);
+    setItems(data.projects);
+  }
 
   return (
     <div className="min-h-screen bg-background flex flex-col">

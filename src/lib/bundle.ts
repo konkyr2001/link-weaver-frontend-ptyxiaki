@@ -1,4 +1,4 @@
-const URL = import.meta.env.VITE_BACKEND_URL;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export interface BundleLink {
   id: string;
@@ -19,7 +19,7 @@ export function generateId(): string {
 
 export async function createBundle(bundle: Bundle, userToken: string, captcha: string): Promise<string | null> {
   try {
-    const res = await fetch (`${URL}/api/project`, {
+    const res = await fetch (`${BACKEND_URL}/api/project`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -43,7 +43,7 @@ export async function createBundle(bundle: Bundle, userToken: string, captcha: s
 
 export async function fetchBundleBySlug(param: string): Promise<Bundle | null> {
   try {
-    const res = await fetch (`${URL}/api/project/${param}`);
+    const res = await fetch (`${BACKEND_URL}/api/project/${param}`);
     if (res.ok) {
       const result = await res.json();
       return {

@@ -4,10 +4,29 @@ import { useTheme } from "@/hooks/use-theme";
 import { Link2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { getUser } from "@/services/user";
 import Header from "@/components/Header";
+import { useEffect, useState } from "react";
 
 const Index = () => {
   const { theme, toggleTheme } = useTheme();
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
+  
+  useEffect(() => {
+    const fetchFreshUser = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+      const freshUser = await getUser(token);
+      if (!freshUser?.error) {
+        localStorage.setItem("user", JSON.stringify(freshUser));
+        setUser(freshUser);
+      }
+    };
+    fetchFreshUser();
+  }, []);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
