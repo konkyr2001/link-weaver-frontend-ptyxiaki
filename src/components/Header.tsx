@@ -15,7 +15,6 @@ const Header = ({ active }: HeaderProps) => {
   const { theme, toggleTheme } = useTheme();
   const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null;
   const [open, setOpen] = useState(false);
-  console.log(user)
 
   const handleLogout = () => {
     googleLogout();
@@ -33,6 +32,9 @@ const Header = ({ active }: HeaderProps) => {
 
   const navLinks = (
     <>
+      <Link to="/" className={linkClass("home")} onClick={() => setOpen(false)}>
+        Home
+      </Link>
       {user && (
         <Link to="/history" className={linkClass("history")} onClick={() => setOpen(false)}>
           History
@@ -60,22 +62,7 @@ const Header = ({ active }: HeaderProps) => {
 
   return (
     <header className="border-b border-border">
-      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link
-          to="/"
-          className="group flex items-center gap-2 text-primary"
-        >
-          <Link2 className="w-5 h-5 transition-all duration-300 ease-out group-hover:scale-110" />
-          <span className="font-display font-bold text-lg">
-            <span className="transition-all duration-300 ease-out text-foreground group-hover:text-primary">
-              We
-            </span>
-            <span className="text-primary transition-all duration-300 ease-out group-hover:tracking-wide">
-              Linkly
-            </span>
-          </span>
-        </Link>
-
+      <div className="max-w-6xl mx-auto px-6 py-4 flex justify-end">
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-6">
           {navLinks}

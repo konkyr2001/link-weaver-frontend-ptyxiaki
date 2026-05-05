@@ -177,7 +177,7 @@ const Account = () => {
           </div>
 
           {/* Plan Info */}
-          <Card>
+          {/* <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg">
                 {PlanIcon && <PlanIcon className="w-5 h-5 text-primary" />}
@@ -241,7 +241,7 @@ const Account = () => {
                 </>
               )}
             </CardContent>
-          </Card>
+          </Card> */}
 
           {/* Profile Info */}
           <Card>
