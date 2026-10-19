@@ -169,16 +169,20 @@ const Account = () => {
     <div className="min-h-screen bg-background flex flex-col">
       <Header active="account" />
 
-      <main className="flex-1 px-6 py-10">
+      <main className="flex-1 w-full min-w-0 px-3 sm:px-6 py-6 sm:py-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="max-w-2xl mx-auto space-y-6"
+          className="w-full max-w-2xl mx-auto min-w-0 space-y-4 sm:space-y-6"
         >
-          <div>
-            <h1 className="font-display text-3xl font-bold text-foreground">Account</h1>
-            <p className="text-muted-foreground text-sm mt-1">Manage your account settings</p>
+          <div className="min-w-0">
+            <h1 className="font-display text-2xl sm:text-3xl font-bold text-foreground">
+              Account
+            </h1>
+            <p className="text-muted-foreground text-xs sm:text-sm mt-1">
+              Manage your account settings
+            </p>
           </div>
 
           {/* Profile Info */}
@@ -189,7 +193,7 @@ const Account = () => {
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSaveProfile} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="firstName">First name</Label>
                     <div className="relative">
@@ -198,7 +202,7 @@ const Account = () => {
                         id="firstName"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
-                        className="pl-10"
+                        className="pl-8 sm:pl-10 text-sm sm:text-base min-w-0 w-full"
                       />
                     </div>
                   </div>
@@ -208,6 +212,7 @@ const Account = () => {
                       id="lastName"
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
+                      className="text-sm sm:text-base min-w-0 w-full"
                     />
                   </div>
                 </div>
@@ -221,13 +226,13 @@ const Account = () => {
                       type="email"
                       value={user.email || ""}
                       disabled
-                      className="pl-10 opacity-60"
+                      className="pl-10 text-sm sm:text-base opacity-60"
                     />
                   </div>
                   {/* <p className="text-xs text-muted-foreground">Email changes require verification (coming soon)</p> */}
                 </div>
 
-                <Button type="submit" disabled={savingProfile}>
+                <Button type="submit" disabled={savingProfile} className="w-full sm:w-auto">
                   {savingProfile ? "Saving…" : "Save Changes"}
                 </Button>
               </form>
@@ -253,7 +258,7 @@ const Account = () => {
                         placeholder="Enter current password"
                         value={currentPassword}
                         onChange={(e) => setCurrentPassword(e.target.value)}
-                        className="pl-10 pr-10"
+                        className="pl-10 pr-10 text-sm sm:text-base"
                       />
                       <button
                         type="button"
@@ -275,7 +280,7 @@ const Account = () => {
                         placeholder="Min. 8 characters"
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
-                        className="pl-10 pr-10"
+                        className="pl-10 pr-10 text-sm sm:text-base"
                       />
                       <button
                         type="button"
@@ -297,7 +302,7 @@ const Account = () => {
                         placeholder="Repeat new password"
                         value={confirmNewPassword}
                         onChange={(e) => setConfirmNewPassword(e.target.value)}
-                        className="pl-10 pr-10"
+                        className="pl-10 pr-10 text-sm sm:text-base"
                       />
                       <button
                         type="button"
@@ -309,7 +314,7 @@ const Account = () => {
                     </div>
                   </div>
 
-                  <Button type="submit" disabled={savingPassword}>
+                  <Button type="submit" disabled={savingPassword} className="w-full sm:w-auto">
                     {savingPassword ? "Updating…" : "Update Password"}
                   </Button>
                 </form>
@@ -331,7 +336,7 @@ const Account = () => {
             <CardContent>
               <AlertDialog>
                 <AlertDialogTrigger asChild>
-                  <Button variant="destructive">Delete Account</Button>
+                  <Button variant="destructive" className="w-full sm:w-auto">Delete Account</Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
@@ -354,6 +359,7 @@ const Account = () => {
                           value={deleteConfirmText}
                           onChange={(e) => setDeleteConfirmText(e.target.value)}
                           autoComplete="off"
+                          className="text-sm sm:text-base"
                         />
                       </>
                     ) : (
@@ -367,7 +373,7 @@ const Account = () => {
                             placeholder="Enter your password"
                             value={deletePassword}
                             onChange={(e) => setDeletePassword(e.target.value)}
-                            className="pl-10 pr-10"
+                            className="pl-10 pr-10 text-sm sm:text-base"
                           />
                           <button
                             type="button"

@@ -106,12 +106,12 @@ export function BundleCreator() {
           sitekey={import.meta.env.VITE_RECAPTCHA_INVISIBLE_SECRET_KEY}
         />
       )}
-      <div className="w-full max-w-2xl mx-auto">
+      <div className="w-full min-w-0 max-w-2xl mx-auto px-2 sm:px-4 lg:px-0">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="glass-card rounded-2xl p-8 space-y-6"
+          className="glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6 min-w-0"
         >
           {/* Header */}
           <div className="flex items-center gap-3">
@@ -133,16 +133,16 @@ export function BundleCreator() {
           <LinkInput onAdd={addLink} />
 
           {/* Links list */}
-          <div className="space-y-2 min-h-[60px]">
+          <div className="space-y-2 min-h-[60px] w-full min-w-0">
             <DragDropContext onDragEnd={onDragEnd}>
               <Droppable droppableId="links">
                 {(provided) => (
-                  <div ref={provided.innerRef} {...provided.droppableProps} className="space-y-2">
+                  <div ref={provided.innerRef} {...provided.droppableProps} className="space-y-2 w-full min-w-0">
                     {links.map((link, i) => (
                       <Draggable key={link.id} draggableId={link.id} index={i}>
                         {(provided, snapshot) => {
                           const child = (
-                            <div ref={provided.innerRef} {...provided.draggableProps} style={provided.draggableProps.style}>
+                            <div ref={provided.innerRef} {...provided.draggableProps} style={provided.draggableProps.style} className="w-full min-w-0">
                               <LinkItem
                                 link={link}
                                 index={i}
@@ -183,9 +183,9 @@ export function BundleCreator() {
                 onClick={generateLink}
                 variant="hero"
                 size="lg"
-                className="w-full h-12 text-base"
+                className="w-full min-h-11 sm:h-12 px-3 text-sm sm:text-base"
               >
-                <Share2 className="w-5 h-5 mr-2" />
+                <Share2 className="w-4 h-4 sm:w-5 sm:h-5 mr-2 shrink-0" />
                 Generate Share Link
               </Button>
 
@@ -198,21 +198,28 @@ export function BundleCreator() {
                     exit={{ opacity: 0, height: 0 }}
                     className="overflow-hidden"
                   >
-                    <div className="bg-secondary/50 rounded-lg p-4 flex items-center gap-3">
-                      <a className="text-sm text-foreground hover:text-primary transition-all truncate flex-1 font-mono" href={generatedUrl} target="_blank">
+                    <div className="bg-secondary/50 rounded-lg p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center gap-3 min-w-0">
+                      <a 
+                        className="block w-full min-w-0 text-xs sm:text-sm text-foreground hover:text-primary transition-all truncate sm:flex-1 font-mono"
+                        href={generatedUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         {generatedUrl}
                       </a>
+
                       <Button
                         onClick={copyToClipboard}
                         variant="glass"
                         size="sm"
-                        className="flex-shrink-0"
+                        className="w-full sm:w-auto shrink-0"
                       >
                         {copied ? (
                           <Check className="w-4 h-4 mr-1" />
                         ) : (
                           <Copy className="w-4 h-4 mr-1" />
                         )}
+
                         {copied ? "Copied" : "Copy"}
                       </Button>
                     </div>
