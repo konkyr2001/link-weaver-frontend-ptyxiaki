@@ -27,6 +27,7 @@ import {
   deleteGoogleUser,
   deleteLocalUser,
 } from "@/services/user";
+import { Navigate } from "react-router-dom";
 
 function getTimeRemaining(expiresAt: string) {
   const delta = Math.max(0, new Date(expiresAt).getTime() - Date.now()) / 1000;
@@ -160,6 +161,10 @@ const Account = () => {
   const planLabel = plan === "pro" ? "Pro" : plan === "plus" ? "Plus" : "Free";
   const PlanIcon = plan === "pro" ? Crown : plan === "plus" ? Plus : null;
 
+  if (!token) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Header active="account" />
@@ -175,73 +180,6 @@ const Account = () => {
             <h1 className="font-display text-3xl font-bold text-foreground">Account</h1>
             <p className="text-muted-foreground text-sm mt-1">Manage your account settings</p>
           </div>
-
-          {/* Plan Info */}
-          {/* <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg">
-                {PlanIcon && <PlanIcon className="w-5 h-5 text-primary" />}
-                Your Plan
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex items-center gap-3">
-                <Badge variant={plan === "free" ? "secondary" : "default"} className="text-sm">
-                  {planLabel}
-                </Badge>
-                {isTrial && (
-                  <Badge variant="outline" className="text-sm border-primary/50 text-primary">
-                    Trial
-                  </Badge>
-                )}
-              </div>
-              {currentPeriodEnd && timeRemaining && (
-                <>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Calendar className="w-4 h-4" />
-                    <span>
-                      {isTrial
-                        ? timeRemaining.days > 0
-                          ? `Trial expires in ${timeRemaining.days} day${timeRemaining.days !== 1 ? "s" : ""}${
-                              timeRemaining.days < 7 && timeRemaining.hours > 0
-                                ? ` and ${timeRemaining.hours} hour${timeRemaining.hours !== 1 ? "s" : ""}`
-                                : ""
-                            }`
-                          : timeRemaining.hours > 0
-                            ? `Trial expires in ${timeRemaining.hours} hour${timeRemaining.hours !== 1 ? "s" : ""}`
-                            : timeRemaining.minutes > 0
-                              ? `Trial expires in ${timeRemaining.minutes} minute${timeRemaining.minutes !== 1 ? "s" : ""}`
-                              : "Trial expires in less than a minute"
-                        : timeRemaining.days > 0
-                          ? `${user.autoRenewEnabled ? "Renews" : "Expires"} in ${timeRemaining.days} day${timeRemaining.days !== 1 ? "s" : ""}${
-                              timeRemaining.days < 7 && timeRemaining.hours > 0
-                                ? ` and ${timeRemaining.hours} hour${timeRemaining.hours !== 1 ? "s" : ""}`
-                                : ""
-                            }`
-                          : timeRemaining.hours > 0
-                            ? `${user.autoRenewEnabled ? "Renews" : "Expires"} in ${timeRemaining.hours} hour${timeRemaining.hours !== 1 ? "s" : ""}`
-                            : timeRemaining.minutes > 0
-                              ? `${user.autoRenewEnabled ? "Renews" : "Expires"} in ${timeRemaining.minutes} minute${timeRemaining.minutes !== 1 ? "s" : ""}`
-                              : "Expires in less than a minute"}
-                    </span>
-                    <span className="text-muted-foreground/60">
-                      ({new Date(currentPeriodEnd).toLocaleDateString()})
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between rounded-lg border border-border bg-muted/30 px-4 py-3">
-                    <div className="space-y-0.5">
-                      <p className="text-sm font-medium text-foreground">Auto-renewal</p>
-                      <p className="text-xs text-muted-foreground">
-                        {user.autoRenewEnabled
-                          ? "Your plan will automatically renew"
-                          : "Your plan will expire at the end of the period"}
-                      </p>
-                    </div>
-                  </div>
-                </>
-              )}
-            </CardContent>
-          </Card> */}
 
           {/* Profile Info */}
           <Card>

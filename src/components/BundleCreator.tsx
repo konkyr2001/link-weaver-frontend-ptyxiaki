@@ -199,9 +199,9 @@ export function BundleCreator() {
                     className="overflow-hidden"
                   >
                     <div className="bg-secondary/50 rounded-lg p-4 flex items-center gap-3">
-                      <p className="text-sm text-foreground truncate flex-1 font-mono">
+                      <a className="text-sm text-foreground hover:text-primary transition-all truncate flex-1 font-mono" href={generatedUrl} target="_blank">
                         {generatedUrl}
-                      </p>
+                      </a>
                       <Button
                         onClick={copyToClipboard}
                         variant="glass"
