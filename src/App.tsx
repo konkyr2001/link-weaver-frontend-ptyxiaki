@@ -11,6 +11,7 @@ import NotFound from "./pages/NotFound";
 import Account from "./pages/Account";
 import History from "./pages/History";
 import GuestRoute from "./components/GuestRoute";
+import UserRoute from "./components/UserRoute";
 
 const queryClient = new QueryClient();
 
@@ -23,8 +24,10 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/b/:slug" element={<BundleView />} />
-          <Route path="/history" element={<History />} />
-          <Route path="/account" element={<Account />} />
+          <Route path="/history" element={
+            <UserRoute> <History /> </UserRoute>} />
+          <Route path="/account" element={
+            <UserRoute> <Account /> </UserRoute>} />
           <Route path="/login" element={
             <GuestRoute> <Login /> </GuestRoute>} />
           <Route path="/signup" element={
