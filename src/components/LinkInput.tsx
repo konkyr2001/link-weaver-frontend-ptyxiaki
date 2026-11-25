@@ -22,7 +22,7 @@ export function LinkInput({ onAdd }: LinkInputProps) {
   return (
     <motion.form
       onSubmit={handleSubmit}
-      className="flex gap-3"
+      className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full min-w-0"
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 }}
@@ -31,9 +31,9 @@ export function LinkInput({ onAdd }: LinkInputProps) {
         value={url}
         onChange={(e) => setUrl(e.target.value)}
         placeholder="Paste a URL here..."
-        className="flex-1 h-12 bg-secondary/50 border-border text-foreground placeholder:text-muted-foreground text-base font-body"
+        className="w-full min-w-0 flex-1 h-12 bg-secondary/50 border-border text-foreground placeholder:text-muted-foreground text-sm sm:text-base font-body"
       />
-      <Button type="submit" variant="hero" size="lg" className="h-12 px-6">
+      <Button type="submit" variant="hero" size="lg" className="w-full sm:w-auto h-8 sm:h-12 sm:px-6 shrink-0">
         <Plus className="w-5 h-5 mr-1" />
         Add
       </Button>

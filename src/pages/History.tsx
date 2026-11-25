@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { ExternalLink, Clock, FolderOpen } from "lucide-react";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
@@ -62,6 +62,10 @@ export default function History() {
     }
     setLoading(false);
     setItems(data.projects);
+  }
+
+  if (!token) {
+    return <Navigate to="/" replace />;
   }
 
   return (
